@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joyeux Anniversaire Mon Amour 🎂✨</title>
+<title>Joyeux Anniversaire ZAMBLE LOU MARIAM 🎂✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -90,6 +90,7 @@
     font: 600 clamp(2.2rem, 9vw, 3.5rem)/1.15 'Dancing Script', cursive;
     text-shadow: 0 8px 26px rgba(215, 189, 130, 0.18);
   }
+  .welcome-name { font-size: 0.82em; }
   .welcome-question {
     margin: 20px 0 24px;
     color: #c9dbd8;
@@ -226,6 +227,12 @@
     line-height: 1.05;
     text-shadow: 0 10px 30px rgba(215, 189, 130, 0.22);
   }
+  .dedication-name {
+    margin-bottom: 12px;
+    color: #8f2038;
+    font: 600 clamp(0.74rem, 2vw, 0.95rem)/1.5 'Playfair Display', serif;
+    letter-spacing: 0.22em;
+  }
   .hero h2 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.1em, 2.8vw, 1.7em);
@@ -243,6 +250,15 @@
     color: var(--text);
     margin-bottom: 18px;
     box-shadow: inset 0 1px 0 rgba(215, 189, 130, 0.04);
+  }
+  .hero-content.reveal-ready .declaration {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.25, 1);
+  }
+  .hero-content.reveal-ready .declaration.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
   .declaration strong { color: var(--gold); font-weight: 600; }
   .signature {
@@ -358,21 +374,6 @@
     justify-content: flex-end;
     padding: 18px 18px 16px;
   }
-  .photo-overlay .lock-icon {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    background: rgba(0, 0, 0, 0.42);
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(215, 189, 130, 0.3);
-  }
   .photo-number {
     font-size: 0.72em;
     color: var(--gold);
@@ -386,6 +387,165 @@
     font-weight: 600;
   }
 
+  /* ===== MEMORY GAME ===== */
+  .game-section {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px 70px;
+  }
+  .game-panel {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 46px);
+    border: 1px solid rgba(165, 44, 67, 0.12);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 22px 60px rgba(104, 35, 48, 0.075);
+    text-align: center;
+  }
+  .game-kicker {
+    color: #a52c43;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .game-panel h2 {
+    margin: 8px 0;
+    color: #791d32;
+    font: 600 clamp(1.8rem, 5vw, 2.7rem)/1.2 'Playfair Display', serif;
+  }
+  .game-description {
+    max-width: 580px;
+    margin: 0 auto 18px;
+    color: #806d70;
+    line-height: 1.7;
+  }
+  .memory-status {
+    margin: 16px 0;
+    color: #791d32;
+    font-weight: 500;
+  }
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(8px, 2vw, 14px);
+    width: min(100%, 520px);
+    margin: 18px auto;
+  }
+  .memory-card {
+    position: relative;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.48s cubic-bezier(0.2, 0.7, 0.25, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .memory-card::before,
+  .memory-card-photo {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+  }
+  .memory-card::before {
+    content: "♡";
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(165, 44, 67, 0.17);
+    border-radius: inherit;
+    background: linear-gradient(145deg, #c44a5d, #8f2038);
+    color: #fff;
+    font: 600 clamp(1.8rem, 8vw, 3rem) 'Dancing Script', cursive;
+    box-shadow: 0 8px 18px rgba(143, 32, 56, 0.16);
+  }
+  .memory-card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid rgba(165, 44, 67, 0.17);
+    border-radius: inherit;
+    transform: rotateY(180deg);
+    box-shadow: 0 8px 18px rgba(104, 35, 48, 0.1);
+  }
+  .memory-card.is-open,
+  .memory-card.is-matched { transform: rotateY(180deg); }
+  .memory-card.is-matched .memory-card-photo {
+    border: 3px solid rgba(165, 44, 67, 0.55);
+  }
+  .memory-card:focus-visible,
+  .memory-reset:focus-visible {
+    outline: 3px solid #a52c43;
+    outline-offset: 4px;
+  }
+  .memory-reset {
+    min-height: 46px;
+    padding: 10px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #b83a50, #8f2038);
+    color: #fff;
+    font: 500 0.95rem 'Poppins', sans-serif;
+    box-shadow: 0 8px 20px rgba(143, 32, 56, 0.16);
+    cursor: pointer;
+  }
+  .memory-reset:hover { box-shadow: 0 12px 26px rgba(143, 32, 56, 0.24); }
+  .game-celebration {
+    position: fixed;
+    inset: 0;
+    z-index: 320;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .celebration-burst { position: absolute; inset: 0; }
+  .heart-particle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    filter: drop-shadow(0 5px 10px rgba(143, 32, 56, 0.2));
+    animation: heartBurst 1.5s cubic-bezier(0.12, 0.7, 0.25, 1) both;
+  }
+  @keyframes heartBurst {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35); }
+    15% { opacity: 1; }
+    100% {
+      opacity: 0;
+      transform: translate(calc(-50% + var(--heart-x)), calc(-50% + var(--heart-y))) rotate(24deg) scale(1.25);
+    }
+  }
+  .celebration-message {
+    position: relative;
+    z-index: 1;
+    width: min(420px, calc(100vw - 32px));
+    padding: 24px 20px;
+    border: 1px solid rgba(165, 44, 67, 0.22);
+    border-radius: 24px;
+    background: rgba(255, 253, 252, 0.97);
+    box-shadow: 0 24px 70px rgba(104, 35, 48, 0.24);
+    color: #791d32;
+    text-align: center;
+    animation: celebrationPop 3s cubic-bezier(0.2, 0.7, 0.25, 1) both;
+  }
+  .celebration-message strong {
+    display: block;
+    margin-bottom: 6px;
+    font: 600 clamp(1.7rem, 7vw, 2.4rem)/1.2 'Dancing Script', cursive;
+  }
+  .celebration-message span { color: #806d70; line-height: 1.6; }
+  @keyframes celebrationPop {
+    0%, 100% { opacity: 0; transform: scale(0.72); }
+    12%, 78% { opacity: 1; transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .celebration-message { animation: none !important; opacity: 1; transform: none; }
+    .heart-particle { display: none; }
+  }
   /* ===== MODAL ===== */
   .modal {
     position: fixed;
@@ -416,6 +576,72 @@
   @keyframes slideUp {
     from { transform: translateY(28px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
+  }
+  .cinema-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    overflow: hidden;
+    background: rgba(34, 7, 15, 0.58);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .cinema-intro.active {
+    visibility: visible;
+    animation: cinemaFade 2.2s ease both;
+  }
+  .cinema-intro::before,
+  .cinema-intro::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: max(9vh, 58px);
+    background: #16090d;
+    animation: letterboxOpen 1.4s cubic-bezier(0.7, 0, 0.25, 1) 0.45s both;
+  }
+  .cinema-intro::before { top: 0; }
+  .cinema-intro::after { bottom: 0; }
+  .cinema-title {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #fff8f4;
+    text-align: center;
+    text-shadow: 0 3px 28px rgba(165, 44, 67, 0.48);
+    animation: titleReveal 1.7s ease 0.15s both;
+  }
+  .cinema-title span {
+    display: block;
+    margin-bottom: 10px;
+    color: #f3c6c1;
+    font: 500 0.72rem 'Poppins', sans-serif;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+  }
+  .cinema-title strong {
+    font: 600 clamp(2.4rem, 8vw, 5rem)/1.1 'Dancing Script', cursive;
+  }
+  @keyframes cinemaFade {
+    0% { opacity: 0; }
+    12%, 58% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  @keyframes letterboxOpen {
+    to { transform: translateY(-100%); }
+  }
+  .cinema-intro::after {
+    animation-name: letterboxClose;
+  }
+  @keyframes letterboxClose {
+    to { transform: translateY(100%); }
+  }
+  @keyframes titleReveal {
+    0%, 100% { opacity: 0; transform: translateY(calc(-50% + 14px)); }
+    18%, 72% { opacity: 1; transform: translateY(-50%); }
   }
   .close-btn {
     position: absolute;
@@ -452,6 +678,21 @@
       radial-gradient(ellipse at center, rgba(42, 91, 94, 0.34), transparent 70%),
       #050c12;
     touch-action: pan-y;
+  }
+  .modal-stage.transition-intro { animation: stageIntro 0.85s cubic-bezier(0.2, 0.7, 0.25, 1) both; }
+  .modal-stage.transition-next { animation: stageNext 0.72s cubic-bezier(0.2, 0.7, 0.25, 1) both; }
+  .modal-stage.transition-previous { animation: stagePrevious 0.72s cubic-bezier(0.2, 0.7, 0.25, 1) both; }
+  @keyframes stageIntro {
+    from { opacity: 0.35; transform: scale(1.025); filter: blur(7px) brightness(0.65); }
+    to { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); }
+  }
+  @keyframes stageNext {
+    from { opacity: 0.45; transform: translateX(28px) scale(0.99); filter: blur(5px) brightness(0.75); }
+    to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0) brightness(1); }
+  }
+  @keyframes stagePrevious {
+    from { opacity: 0.45; transform: translateX(-28px) scale(0.99); filter: blur(5px) brightness(0.75); }
+    to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0) brightness(1); }
   }
   .modal-stage::after {
     content: "";
@@ -573,6 +814,11 @@
     max-height: 24vh;
     overflow-y: auto;
     overscroll-behavior: contain;
+    animation: captionReveal 0.55s ease 0.12s both;
+  }
+  @keyframes captionReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .modal-body {
     padding: 20px 26px 24px;
@@ -762,9 +1008,6 @@
   .photo-overlay {
     background: linear-gradient(to top, rgba(38, 12, 19, 0.82), rgba(38, 12, 19, 0.08) 58%, transparent);
   }
-  .photo-overlay .lock-icon {
-    border-color: rgba(255, 255, 255, 0.65);
-  }
   .photo-number { color: #ffd9d4; }
   .photo-hint-text { color: #fff; }
   .modal-card {
@@ -823,11 +1066,40 @@
   footer { color: #806d70; }
 
   @media (max-width: 600px) {
+    .welcome-screen {
+      padding: max(18px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
+    }
     .hero { min-height: auto; padding: 28px 14px 20px; }
-    .hero-panel { border-radius: 24px; }
+    .hero-panel { width: 100%; padding: 22px 16px 18px; border-radius: 24px; }
+    .hero h1 { font-size: clamp(2rem, 9vw, 3.2rem); overflow-wrap: anywhere; }
+    .dedication-name { letter-spacing: 0.12em; }
+    .declaration { padding: 15px 16px; line-height: 1.7; }
     .gallery-section { padding: 18px 12px 64px; }
-    .gallery-inner { border-radius: 22px; }
-    .modal-stage { height: 58vh; height: 58dvh; }
+    .gallery-inner { border-radius: 22px; padding: 26px 12px 14px; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .photo-card { aspect-ratio: 3 / 4; border-radius: 15px; }
+    .photo-overlay { padding: 12px; }
+    .photo-hint-text { font-size: 0.82em; overflow-wrap: anywhere; }
+    .game-section { padding: 0 12px 54px; }
+    .game-panel { padding: 24px 14px; border-radius: 22px; }
+    .music-player {
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      right: calc(12px + env(safe-area-inset-right));
+    }
+    .modal {
+      padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right))
+        max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left));
+    }
+    .modal-card {
+      max-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px);
+    }
+    .modal-stage { height: min(58dvh, 500px); min-height: 160px; }
+    .photo-nav { width: 44px; height: 44px; }
+    .close-btn { width: 44px; height: 44px; }
+  }
+  @media (max-width: 360px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .photo-card { aspect-ratio: 4 / 3; }
   }
 </style>
 </head>
@@ -837,7 +1109,7 @@
 <section id="welcomeScreen" class="welcome-screen" aria-labelledby="welcomeTitle">
   <div class="welcome-card">
     <span class="welcome-crown" aria-hidden="true">♛</span>
-    <h1 id="welcomeTitle">Bienvenue sur ton site,<br>la reine de mon cœur</h1>
+    <h1 id="welcomeTitle">Bienvenue sur ton site,<br><span class="welcome-name">ZAMBLE LOU MARIAM</span></h1>
     <p class="welcome-question">Tu m’aimes ?</p>
     <div class="answer-buttons" id="answerButtons">
       <button class="answer-button" type="button" onclick="answerLove(true)">Oui 💛</button>
@@ -856,6 +1128,7 @@
     <div class="hero-panel">
       <div class="hero-content">
         <span class="birthday-tag">✨ Joyeux Anniversaire ✨</span>
+        <p class="dedication-name">ZAMBLE LOU MARIAM</p>
         <h1>Ma Précieuse, Mon Cœur, Mon Ange</h1>
         <h2>Aujourd'hui, c'est TA journée 🎂</h2>
 
@@ -875,7 +1148,7 @@
           Alors aujourd'hui, je te souhaite tout le bonheur du monde. Mais surtout, je te promets de tout faire pour te le donner, jour après jour. 🎁
         </p>
 
-        <p class="signature">Joyeux anniversaire mon amour ♡</p>
+        <p class="signature">Joyeux anniversaire, ZAMBLE LOU MARIAM ♡</p>
         <div class="scroll-hint">Découvre notre histoire en images ↓</div>
       </div>
     </div>
@@ -889,7 +1162,33 @@
     </div>
   </section>
 
-  <footer>Fait avec ♡ rien que pour toi, pour ton anniversaire 🎂</footer>
+  <section class="game-section" aria-labelledby="gameTitle">
+    <div class="game-panel">
+      <span class="game-kicker">À toi de jouer</span>
+      <h2 id="gameTitle">Le memory de l’amour 💌</h2>
+      <p class="game-description">Retourne les cartes et retrouve les 8 paires. Combien de coups te faudra-t-il ?</p>
+      <p class="memory-status" id="memoryStatus" aria-live="polite">Prépare-toi à retrouver les paires !</p>
+      <div class="memory-grid" id="memoryGrid" aria-label="Jeu de memory"></div>
+      <button class="memory-reset" id="memoryReset" type="button">Mélanger et rejouer</button>
+    </div>
+  </section>
+
+  <div id="gameCelebration" class="game-celebration hidden" aria-hidden="true">
+    <div class="celebration-burst" aria-hidden="true"></div>
+    <div class="celebration-message" role="status" aria-live="polite" aria-atomic="true">
+      <strong>Bravo, ma princesse !</strong>
+      <span>Tu as retrouvé toutes les paires 💖</span>
+    </div>
+  </div>
+
+  <footer>Fait avec ♡ rien que pour toi, pour ton anniversaire, moi seul ma princesse 🎂</footer>
+</div>
+
+<div id="cinemaIntro" class="cinema-intro" aria-hidden="true">
+  <div class="cinema-title">
+    <span>Un film de nos souvenirs</span>
+    <strong>ZAMBLE LOU MARIAM</strong>
+  </div>
 </div>
 
 <!-- ===================== MODAL ===================== -->
@@ -921,9 +1220,6 @@ const PHOTOS = [
   { src: "2.png", title: "Ton regard", story: "Dans ton regard, je trouve chaque jour une nouvelle raison de t'aimer." },
   { src: "3.png", title: "Ma beauté", story: "Je pourrais admirer ton beau sourire pendant des heures sans jamais m'en lasser." },
   { src: "4.png", title: "Sans filtre", story: "Tu es magnifique simplement en étant toi, et c'est comme ça que je t'aime." },
-  { src: "5.png", title: "Mon plus beau baiser", story: "Dans ce baiser, il y a toute la tendresse que mon cœur garde pour toi." },
-  { src: "6.png", title: "À tes côtés", story: "À tes côtés, même une simple photo devient mon souvenir préféré." },
-  { src: "7.png", title: "Ma pensée préférée", story: "Où que tu sois, tu es toujours la plus belle pensée de ma journée." },
   { src: "8.png", title: "Mon trésor", story: "Mon cœur a trouvé son plus beau trésor : toi, et personne d'autre." },
   { src: "9.png", title: "Tu rayonnes", story: "Même sous le soleil, c'est toi qui brilles le plus à mes yeux." },
   { src: "11.png", title: "Mon rayon de soleil", story: "Ton sourire est la lumière qui rend mes journées plus belles." },
@@ -941,8 +1237,25 @@ const PHOTOS = [
   { src: "23.jpeg", title: "Ma reine, tout simplement", story: "Dans cette tenue pleine de couleurs, tu as encore ce charme qui me fait craquer." },
   { src: "24.jpeg", title: "Un souvenir qui brille", story: "Même dans la nuit, ton sourire reste la plus belle lumière de mes souvenirs." },
   { src: "25.jpeg", title: "Ta douceur", story: "Ta tendresse me rassure et me rappelle chaque jour la chance que j'ai de t'aimer." },
-  { src: "26.jpeg", title: "Nous deux, partout", story: "Peu importe l'endroit, chaque sortie devient spéciale dès qu'on la partage ensemble." }
+  { src: "26.jpeg", title: "Nous deux, partout", story: "Peu importe l'endroit, chaque sortie devient spéciale dès qu'on la partage ensemble." },
+  { src: "27.jpeg", title: "Un nouveau souvenir", story: "Chaque moment avec toi devient un souvenir précieux." }
 ];
+const MEMORY_PHOTOS = [
+  { src: "14.png", title: "Mon élégance préférée" },
+  { src: "17.png", title: "Belle en toute saison" },
+  { src: "18.png", title: "Ton sourire me suffit" },
+  { src: "19.png", title: "Ma lumière" },
+  { src: "21.png", title: "Mon petit bonheur" },
+  { src: "23.jpeg", title: "Ma reine, tout simplement" },
+  { src: "24.jpeg", title: "Un souvenir qui brille" },
+  { src: "27.jpeg", title: "Un nouveau souvenir" }
+];
+let memoryFirstCard = null;
+let memoryMoves = 0;
+let memoryPairs = 0;
+let memoryLocked = false;
+let memoryFlipTimer = null;
+let celebrationTimer = null;
 
 /* =====================================================
    🔓  LOGIQUE
@@ -991,6 +1304,9 @@ function toggleMusic() {
 function initSite() {
   createFloatingHearts();
   renderGallery();
+  animateDeclarations();
+  document.getElementById('memoryReset').addEventListener('click', resetMemoryGame);
+  resetMemoryGame();
   playMusicOnUnlock();
 }
 
@@ -1009,6 +1325,9 @@ function answerLove(accepts) {
     message.textContent = 'Tu es la meilleure 💛';
     document.getElementById('mainContent').classList.remove('hidden');
     document.getElementById('welcomeScreen').classList.add('leaving');
+    const cinemaIntro = document.getElementById('cinemaIntro');
+    cinemaIntro.classList.add('active');
+    window.setTimeout(() => cinemaIntro.classList.remove('active'), 2200);
     initSite();
     return;
   }
@@ -1050,7 +1369,6 @@ function renderGallery() {
     card.innerHTML = `
       <img src="${photo.src}" alt="Photo ${i + 1}" loading="lazy">
       <div class="photo-overlay">
-        <div class="lock-icon">📷</div>
         <div class="photo-number">Souvenir n°${i + 1}</div>
         <div class="photo-hint-text">${photo.title}</div>
       </div>
@@ -1073,8 +1391,134 @@ function animateCards() {
   cards.forEach(card => observer.observe(card));
 }
 
+function animateDeclarations() {
+  const content = document.querySelector('.hero-content');
+  const declarations = content.querySelectorAll('.declaration');
+  if (!('IntersectionObserver' in window)) {
+    declarations.forEach(paragraph => paragraph.classList.add('revealed'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+  content.classList.add('reveal-ready');
+  declarations.forEach(paragraph => observer.observe(paragraph));
+}
+
+function resetMemoryGame() {
+  window.clearTimeout(memoryFlipTimer);
+  hideGameCelebration();
+  memoryFirstCard = null;
+  memoryMoves = 0;
+  memoryPairs = 0;
+  memoryLocked = false;
+
+  const deck = [...MEMORY_PHOTOS, ...MEMORY_PHOTOS];
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+
+  const grid = document.getElementById('memoryGrid');
+  grid.innerHTML = '';
+  deck.forEach((photo, index) => {
+    const card = document.createElement('button');
+    card.className = 'memory-card';
+    card.type = 'button';
+    card.dataset.photo = photo.src;
+    card.dataset.title = photo.title;
+    card.setAttribute('aria-label', `Carte cachée ${index + 1}`);
+    card.innerHTML = `<img class="memory-card-photo" src="${photo.src}" alt="" loading="lazy">`;
+    card.addEventListener('click', () => flipMemoryCard(card, index + 1));
+    grid.appendChild(card);
+  });
+  updateMemoryStatus('Retrouve les 8 paires !');
+}
+
+function flipMemoryCard(card, cardNumber) {
+  if (memoryLocked || card.classList.contains('is-open') || card.classList.contains('is-matched')) return;
+
+  card.classList.add('is-open');
+  card.setAttribute('aria-label', `Photo révélée : ${card.dataset.title}`);
+  if (!memoryFirstCard) {
+    memoryFirstCard = card;
+    return;
+  }
+
+  memoryMoves++;
+  const firstCard = memoryFirstCard;
+  memoryFirstCard = null;
+  if (firstCard.dataset.photo === card.dataset.photo) {
+    firstCard.classList.add('is-matched');
+    card.classList.add('is-matched');
+    firstCard.setAttribute('aria-label', `Paire trouvée : ${firstCard.dataset.title}`);
+    card.setAttribute('aria-label', `Paire trouvée : ${card.dataset.title}`);
+    memoryPairs++;
+    updateMemoryStatus(memoryPairs === MEMORY_PHOTOS.length
+      ? `Bravo ! Tu as trouvé toutes les paires en ${memoryMoves} coups 💖`
+      : 'Belle paire ! Continue comme ça 💖');
+    if (memoryPairs === MEMORY_PHOTOS.length) showGameCelebration();
+    return;
+  }
+
+  memoryLocked = true;
+  updateMemoryStatus('Pas la même paire… essaie encore !');
+  memoryFlipTimer = window.setTimeout(() => {
+    firstCard.classList.remove('is-open');
+    card.classList.remove('is-open');
+    firstCard.setAttribute('aria-label', 'Carte cachée');
+    card.setAttribute('aria-label', `Carte cachée ${cardNumber}`);
+    memoryLocked = false;
+  }, 750);
+}
+
+function updateMemoryStatus(message) {
+  document.getElementById('memoryStatus').textContent =
+    `${message} Coups : ${memoryMoves} · Paires : ${memoryPairs}/${MEMORY_PHOTOS.length}`;
+}
+
+function showGameCelebration() {
+  const celebration = document.getElementById('gameCelebration');
+  const burst = celebration.querySelector('.celebration-burst');
+  const hearts = ['💖', '💗', '💕', '❤️', '💘'];
+  burst.innerHTML = '';
+  for (let i = 0; i < 20; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 70 + Math.random() * 130;
+    const heart = document.createElement('span');
+    heart.className = 'heart-particle';
+    heart.setAttribute('aria-hidden', 'true');
+    heart.textContent = hearts[i % hearts.length];
+    heart.style.setProperty('--heart-x', `${Math.cos(angle) * distance}px`);
+    heart.style.setProperty('--heart-y', `${Math.sin(angle) * distance}px`);
+    heart.style.animationDelay = `${Math.random() * 120}ms`;
+    burst.appendChild(heart);
+  }
+  celebration.classList.remove('hidden');
+  celebration.setAttribute('aria-hidden', 'false');
+  window.clearTimeout(celebrationTimer);
+  celebrationTimer = window.setTimeout(hideGameCelebration, 3000);
+}
+
+function hideGameCelebration() {
+  window.clearTimeout(celebrationTimer);
+  const celebration = document.getElementById('gameCelebration');
+  if (!celebration) return;
+  celebration.classList.add('hidden');
+  celebration.setAttribute('aria-hidden', 'true');
+  celebration.querySelector('.celebration-burst').innerHTML = '';
+}
+
 function openPhoto(index) {
   currentPhotoIndex = index;
+  photoTransitionDirection = 'intro';
   isSlideshowPlaying = true;
   renderModalPhoto();
   document.getElementById('modal').classList.remove('hidden');
@@ -1083,6 +1527,7 @@ function openPhoto(index) {
 }
 
 let currentPhotoIndex = 0;
+let photoTransitionDirection = 'intro';
 const SLIDE_DURATION = 10000;
 let isSlideshowPlaying = true;
 let autoAdvanceTimer = null;
@@ -1092,7 +1537,7 @@ function renderModalPhoto() {
   const content = document.getElementById('modalContent');
 
   content.innerHTML = `
-    <div class="modal-stage" id="modalStage">
+    <div class="modal-stage transition-${photoTransitionDirection}" id="modalStage">
       <img src="${photo.src}" alt="${photo.title}" class="modal-img">
       <button class="photo-nav previous" type="button" aria-label="Photo précédente" onclick="showPreviousPhoto()">‹</button>
       <button class="photo-nav next" type="button" aria-label="Photo suivante" onclick="showNextPhoto()">›</button>
@@ -1113,12 +1558,14 @@ function renderModalPhoto() {
 
 function showPreviousPhoto() {
   currentPhotoIndex = (currentPhotoIndex - 1 + PHOTOS.length) % PHOTOS.length;
+  photoTransitionDirection = 'previous';
   renderModalPhoto();
   startAutoAdvance();
 }
 
 function showNextPhoto() {
   currentPhotoIndex = (currentPhotoIndex + 1) % PHOTOS.length;
+  photoTransitionDirection = 'next';
   renderModalPhoto();
   startAutoAdvance();
 }
